@@ -1,5 +1,4 @@
 // Carrito de compradocu
-
 function realizar_compra(monto, dto) {
     let salir_compra = false
     do {
