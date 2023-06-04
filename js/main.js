@@ -31,6 +31,7 @@ function realizar_compra(monto, dto) {
             case "0":
                 alert('La compra no fue realizada.')
                 salir_compra = true
+                salir_menu = false
                 break
             default:
                 alert(`La opción ingresada no es correcta. Intente nuevamente`)
@@ -44,12 +45,13 @@ function realizar_compra(monto, dto) {
 
 function sumar_montos(monto, prod, precio) {
     let cant_producto = parseInt(prompt(`El valor de cada ${prod} es de $${precio}. 
-        Ingrese la cantidad de prductos a agregar:`))
+        Ingrese la cantidad de productos a agregar:`))
 
     // validacion de que la cantidad de productos ingresada es un numero valido para poder operar
     while (isNaN(cant_producto)) {
         cant_producto = parseInt(prompt(`El valor ingresado no es un número valido. Intente de nuevo (si desea anular la operacion, ingrese 0):`))
     }
+
     //acumulacion de monto con valores seleccionados
     monto += (cant_producto * precio)
 
@@ -115,16 +117,19 @@ function menu(nombre) {
                 monto = agregar_prods(monto)
                 break
             case "2":
-                alert(`El monto actual es ${monto}`)
+                alert(`El monto actual de su carrito es de $${monto}`)
                 break
             case "3":
                 // la idea es poder hacer esta parte de codigo como funcion en un futuro con arrays, asi se pueden hacer return de varios valores (el del monto y descuento)
                 let monto_viejo = monto
                 alert(`Se le aplicará un descuento del 10% a su compra si el monto es superior a $50.000`)
-                if (monto >= 50000) {
+                if (monto >= 50000 && !descuento) {
                     descuento = true
                     monto = monto * 0.9
                     alert(`Se le aplicó el descuento a su compra, su monto anterior es de $${monto_viejo}. Fue actualizado a $${monto}`)
+                }
+                else if(descuento){
+                    alert(`Ya tiene un descuento aplicado. Estos no son acumulativos.`)
                 }
                 else {
                     alert(`Su monto actual es de $${monto}. Es inferior a $50.000, por lo que no se aplica el descuento.`)
